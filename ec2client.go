@@ -1,28 +1,14 @@
 package main
 
 import (
-	"log"
-
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ec2"
+	"github.com/aws/aws-sdk-go/service/ec2/ec2iface"
 )
 
 // ListEC2Ids lists ids of ec2 instances.
-func ListEC2Ids() ([]string, error) {
-
-	region := "ap-northeast-1"
-	sessOpt := session.Options{
-		SharedConfigState: session.SharedConfigEnable,
-		Config:            aws.Config{Region: aws.String(region)},
-	}
-	sess, err := session.NewSessionWithOptions(sessOpt)
-	if err != nil {
-		log.Fatal(err)
-	}
+func ListEC2Ids(svc ec2iface.EC2API) ([]string, error) {
 
 	var instances []string
-	svc := ec2.New(sess)
 	params := &ec2.DescribeInstancesInput{}
 	resp, err := svc.DescribeInstances(params)
 	if err != nil {
