@@ -32,7 +32,8 @@ func (svc *mockEC2Iface) DescribeInstances(*ec2.DescribeInstancesInput) (*ec2.De
 
 func TestList(t *testing.T) {
 	mockSvc := &mockEC2Iface{}
-	instances, err := ListEC2Ids(mockSvc)
+	mockEC2Client := NewEC2Client(mockSvc)
+	instances, err := mockEC2Client.ListEC2Ids()
 	if err != nil {
 		t.Errorf("Expected no error for empty input, but got %v.", err)
 	}

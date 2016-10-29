@@ -5,12 +5,28 @@ import (
 	"github.com/aws/aws-sdk-go/service/ec2/ec2iface"
 )
 
-// ListEC2Ids lists ids of ec2 instances.
-func ListEC2Ids(svc ec2iface.EC2API) ([]string, error) {
+// EC2Client -
+type EC2Client interface {
+	ListEC2Ids() ([]string, error)
+}
 
+// ec2Client -
+type ec2Client struct {
+	client ec2iface.EC2API
+}
+
+// NewEC2Client is construct of ec2 object.
+func NewEC2Client(svc ec2iface.EC2API) EC2Client {
+	return &ec2Client{
+		client: svc,
+	}
+}
+
+// ListEC2Ids lists ids of ec2 instances.
+func (svc *ec2Client) ListEC2Ids() ([]string, error) {
 	var instances []string
 	params := &ec2.DescribeInstancesInput{}
-	resp, err := svc.DescribeInstances(params)
+	resp, err := svc.client.DescribeInstances(params)
 	if err != nil {
 		return instances, err
 	}

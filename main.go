@@ -21,7 +21,8 @@ func runEc2() {
 		log.Fatal(err)
 	}
 
-	instances, err := ListEC2Ids(ec2.New(sess))
+	ec2Client := NewEC2Client(ec2.New(sess))
+	instances, err := ec2Client.ListEC2Ids()
 	if err != nil {
 		log.Fatal(err)
 	}
