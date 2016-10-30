@@ -1,4 +1,9 @@
 language: go
+sudo: false
+
+env:
+  global:
+    secure: "1PjOS0yhvV9gmkfu7Y6XEYPDkxejOb7Qe6m4BAFmLQe133DqsgvGf9TC3SItXuAQfzi5qJwgUiGotasX8wNFr2EQDO1Dzo+0rX2fNa/dLwgUam6foXx5HhXinGOHbbc6LyAaRx2D3eDqZaw3PssPZ94pMy9ALCCawXWc85sVwFQS0mPB8h6oBtVfN/Hdp7v1w7cVR89s1KYSA+T9FAYKGDaaRS9Mmihs3o52K9NsURsnPVZj7sI1Z2ir1xdOwFIvUIbl6nkRNs0lFEgrld+69+8p0bSGqcZJjo4EaVNb2F4HPm5z+zxwVPPJJn1WhqVgUFG9dQ5w2HZM6VcQynbxGqEQJRbXqY+wmCmL/HrWq0iof9hIF2gtTU2Z7CrNRDdTSmCsDMJP02sPD/XhqiKoeo8SM7GwGcayoDSzQUYXgcOeRUMtajyjLimM2u5CAu4+DbDfdip6OzinSkDgca65pYIub61abDRdOEGD+ayZkSrZofzeky+h0TakhlS2n1OZorDNTu32umGsB8iM9ycbB9WWONi034SaUimvLd3xl5qqUhEBTzhnFuTHnwN84ilHdw25V3Jm5IuU/v71hVecluRqDk5Fts+54utyyvas6M5NjsCW2mqpAkB1ScdnL1S78KITgNHF8QjDrVOrM+9O7x6dvr8qgtMZprm9Fo+NdEI="
 
 os:
   - linux
@@ -10,3 +15,9 @@ go:
 
 script:
   - go test -v
+  - $HOME/gopath/bin/goveralls -repotoken $COVERALLS_TOKEN
+
+before_install:
+  - go get github.com/axw/gocov/gocov
+  - go get github.com/mattn/goveralls
+  - go get code.google.com/p/go.tools/cmd/cover
