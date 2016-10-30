@@ -30,7 +30,7 @@ func (svc *mockEC2Iface) DescribeInstances(*ec2.DescribeInstancesInput) (*ec2.De
 	}, nil
 }
 
-func TestList(t *testing.T) {
+func TestListEC2Ids(t *testing.T) {
 	mockSvc := &mockEC2Iface{}
 	mockEC2Client := NewEC2Client(mockSvc)
 	instances, err := mockEC2Client.ListEC2Ids()
