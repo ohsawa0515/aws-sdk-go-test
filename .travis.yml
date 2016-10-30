@@ -21,3 +21,7 @@ before_install:
   - go get github.com/axw/gocov/gocov
   - go get github.com/mattn/goveralls
   - go get golang.org/x/tools/cmd/cover
+
+notifications:
+  slack:
+    secure: "C5rLRy/goL4PB2gd7zmCy88EXZ4PKLTDD/vO7aMtm8jbBGMjnVFTj9EtBpILr01sa4VssD+UlE5UZhujVWSw7zed7QTZbC2AL7WoKRpetgRb8dTtGalDf0x5a1IWIM7LZHPGcj76Uog6EBysNDs/cMhAHKLUZPaRSH5SopCkScf8z/44AYoNM4/5qp9P09T4IEs1CVcAPiTd6PCZQHmGa/ek7wR7+V8+izjA/0eTb0An9Z55O4oQaqZZEcG/B1aNUaR8QT9raNbhsMdDAHwWNNGScnZvBPVWGZ1eeDdjbUd4Bd8zmuJ4jX1FqZ1APqt3F06k1ydg/1YIhiHCWM05n59VPzDV3XhF3HtLp+tsaZDOvyamwnGgCxqkvsnjp4GLF8CTzSJgwZ4/U2EXAJ4fj9XiNCCyZghSPtYNbJOvvlbpb/BNZJs8uBG9ZhzDUbrZMu+2/DYavNoXiyv4XoqJo+tnXI88GmWQPUtrG2ScmjcE3yljLIJ/ldFjlgjiYH2C/ODkLb5N86oCkhUgOe+AM+KZx7bCOBtXMOw/WDQb012keGUmUN64GfnqNh2vzosddhvJ1K/yZO8g/U0E0+AM5ByAk/IiWs0U1sHbh3r6n8J/TBn/EaL9uYDirBp0hPQ2nLUebPC85SxMxDYVT7hdhPswvGeFSugvT5KdXjAa76I="
