@@ -35,10 +35,10 @@ func TestListEC2Ids(t *testing.T) {
 	mockEC2Client := NewEC2Client(mockSvc)
 	instances, err := mockEC2Client.ListEC2Ids()
 	if err != nil {
-		t.Errorf("Expected no error for empty input, but got %v.", err)
+		t.Errorf("Expected no error, but got %v.", err)
 	}
 	if len(instances) == 0 {
-		t.Errorf("Expected list of ec2 instance id for empty input, but got empty.")
+		t.Errorf("Expected list of ec2 instance id, but got empty.")
 	}
 	expectedInstances := []string{
 		"i-12345678",
