@@ -10,12 +10,12 @@ os:
   - osx
 
 go:
-  - 1.6
-  - 1.7
+  - 1.10
+  - 1.11
 
 script:
   - go test -v
-  - $HOME/gopath/bin/goveralls -repotoken $COVERALLS_TOKEN
+  - $HOME/gopath/bin/goveralls -repotoken $COVERALLS_TOKEN -service=travis-ci
 
 before_install:
   - go get github.com/axw/gocov/gocov
