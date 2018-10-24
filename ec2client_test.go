@@ -8,11 +8,11 @@ import (
 	"github.com/aws/aws-sdk-go/service/ec2/ec2iface"
 )
 
-type mockEC2Iface struct {
+type mockEC2iface struct {
 	ec2iface.EC2API
 }
 
-func (svc *mockEC2Iface) DescribeInstances(*ec2.DescribeInstancesInput) (*ec2.DescribeInstancesOutput, error) {
+func (m *mockEC2iface) DescribeInstances(*ec2.DescribeInstancesInput) (*ec2.DescribeInstancesOutput, error) {
 
 	return &ec2.DescribeInstancesOutput{
 		Reservations: []*ec2.Reservation{
@@ -31,9 +31,8 @@ func (svc *mockEC2Iface) DescribeInstances(*ec2.DescribeInstancesInput) (*ec2.De
 }
 
 func TestListEC2Ids(t *testing.T) {
-	mockSvc := &mockEC2Iface{}
-	mockEC2Client := NewEC2Client(mockSvc)
-	instances, err := mockEC2Client.ListEC2Ids()
+	mockClient := NewClient(&mockEC2iface{})
+	instances, err := mockClient.ListIds()
 	if err != nil {
 		t.Errorf("Expected no error, but got %v.", err)
 	}

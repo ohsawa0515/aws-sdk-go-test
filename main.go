@@ -9,26 +9,21 @@ import (
 	"github.com/aws/aws-sdk-go/service/ec2"
 )
 
-func runEc2() {
-
-	region := "ap-northeast-1"
-	sessOpt := session.Options{
-		SharedConfigState: session.SharedConfigEnable,
-		Config:            aws.Config{Region: aws.String(region)},
-	}
-	sess, err := session.NewSessionWithOptions(sessOpt)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	ec2Client := NewEC2Client(ec2.New(sess))
-	instances, err := ec2Client.ListEC2Ids()
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(instances)
-}
+const (
+	region = "ap-northeast-1"
+)
 
 func main() {
-	runEc2()
+	sess := session.Must(session.NewSession(
+		&aws.Config{
+			Region: aws.String(region),
+		}))
+
+	client := NewClient(ec2.New(sess))
+	instances, err := client.ListIds()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(instances)
 }
