@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/ec2metadata"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ec2"
 )
@@ -19,11 +20,19 @@ func main() {
 			Region: aws.String(region),
 		}))
 
-	client := NewClient(ec2.New(sess))
-	instances, err := client.ListIds()
+	// EC2
+	ec2Client := NewClient(ec2.New(sess))
+	instances, err := ec2Client.ListIds()
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	fmt.Println(instances)
+
+	// EC2metadata
+	ec2MetadataSvc := ec2metadata.New(sess)
+	instanceID, err := GetInstanceID(ec2MetadataSvc)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(instanceID)
 }
